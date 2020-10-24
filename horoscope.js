@@ -1,4 +1,5 @@
 // What is your star sign?
+import React from "react";
 
 let days = 0;
 let month = +prompt("What is your birth month?");
@@ -39,7 +40,11 @@ monthsOfYear.forEach((month, i) => {
   months.push({ id: i + 1, month: month, abbr: monthsAbbr[i] });
 });
 
-console.log(months);
+// months.forEach((monthObj) => {
+//   if (monthObj.month === month || month.abbr === month) {
+//     month = monthObj.id;
+//   }
+// });
 
 switch (month) {
   case 1:
@@ -47,7 +52,6 @@ switch (month) {
     break;
   case 2:
     days = 31;
-    console.log("hi");
     break;
   case 3:
     days = 59;
@@ -85,44 +89,56 @@ days = days + date;
 
 switch (true) {
   case days < 20 || days > 355:
-    sign = "Capricorn";
+    sign = "capricorn";
     break;
   case days < 50:
-    sign = "Aquarius";
+    sign = "aquarius";
     break;
   case days < 80:
-    sign = "Pisces";
+    sign = "pisces";
     break;
   case days < 110:
-    sign = "Aries";
+    sign = "aries";
     break;
   case days < 141:
-    sign = "Taurus";
+    sign = "taurus";
     break;
   case days < 172:
-    sign = "Gemini";
+    sign = "gemini";
     break;
   case days < 204:
-    sign = "Cancer";
+    sign = "cancer";
     break;
   case days < 235:
-    sign = "Leo";
+    sign = "leo";
     break;
   case days < 266:
-    sign = "Virgo";
+    sign = "virgo";
     break;
   case days < 296:
-    sign = "Libra";
+    sign = "libra";
     break;
   case days < 326:
-    sign = "Scorpio";
+    sign = "scorpio";
     break;
   case days < 356:
-    sign = "Sagittarius";
+    sign = "sagittarius";
     break;
 }
 
-alert(sign);
+const URL = `https://aztro.sameerkumar.website/?sign=${sign}&day=today`;
+fetch(URL, {
+  method: "POST",
+})
+  .then((response) => response.json())
+  .then((json) => {
+    const date = json.current_date;
+    console.log(date);
+    sign = `Sign: ${sign} Horoscope for ${date}: ${json.description}`;
+    alert(sign);
+  });
+
+console.log(sign);
 
 // // Aquarius 20-49
 // Pisces 50-79
