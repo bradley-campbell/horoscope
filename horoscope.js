@@ -3,7 +3,7 @@
 let days = 0;
 let month = +prompt("What is your birth month?");
 let date = +prompt("What is your birth date?");
-let sunSign;
+let sign;
 
 let monthsOfYear = [
   "january",
